@@ -1,4 +1,4 @@
-from constants import ALPHABET
+from utils.constants import ALPHABET
 
 if __name__ == "__main__":
     ciphertext = "fqv{iluvw-fkdoohqjh}"
