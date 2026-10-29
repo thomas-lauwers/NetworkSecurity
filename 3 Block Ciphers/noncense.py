@@ -1,5 +1,6 @@
 from Crypto.Cipher import AES
 from Crypto.Util import Counter
+from utils import helper
 
 def encrypt(key, nonce, msg):
     ctr = Counter.new(64, prefix=nonce)
@@ -15,6 +16,7 @@ if __name__ == "__main__":
     ct_flag = bytes.fromhex(ciphertext_flag)
     ct_known = bytes.fromhex(ciphertext_known)
 
-    keystream = bytes(a ^ b for a, b in zip(ct_known, known_message))
-    plaintext = bytes(a ^ b for a, b in zip(ct_flag, keystream[:len(ct_flag)]))
+    keystream = helper.xor(ct_known, known_message)
+    plaintext = helper.xor(ct_flag, keystream)
+
     print(plaintext.decode())

@@ -1,5 +1,5 @@
 import cipher
-
+from utils import helper
 
 if __name__ == "__main__":
     ciphertext = "22135cc0b9daa9e717f98a998e6ee5e92655e1a88f"
@@ -9,8 +9,7 @@ if __name__ == "__main__":
     cipher_bytes = bytes.fromhex(ciphertext)
     secret_bytes = bytes.fromhex(secret_text)
 
-    known_keystream = bytes(p ^ c for p, c in zip(known_plaintext, cipher_bytes))
-
+    known_keystream = helper.xor(known_plaintext, cipher_bytes)
 
     for seed in range(cipher.M):
         first_state = (cipher.A * seed + cipher.C) % cipher.M
